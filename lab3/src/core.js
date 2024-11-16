@@ -125,9 +125,12 @@ function sequence(start = 0, step = 1) {
  * deepEqual({arr: [22, 33], text: 'text'}, {arr: [22, 3], text: 'text2'}) // false
  */
 function deepEqual(firstObject, secondObject) {
+
+    if (Number.isNaN(firstObject) && Number.isNaN(secondObject)) {
+        return true;
+    }
     
     if (firstObject === secondObject) return true;
-
     
     if (firstObject == null || secondObject == null || 
         typeof firstObject !== 'object' || typeof secondObject !== 'object') {
