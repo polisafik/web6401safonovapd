@@ -1,0 +1,303 @@
+/* Переменные для цветов и шрифтов */
+:root {
+    --primary-color: #4CAF50;
+    --primary-color-hover: #45a049;
+    --secondary-color: #f9f9f9;
+    --text-color: #333;
+    --text-light-color: #555;
+    --border-color: #ddd;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --font-family: 'Arial', sans-serif;
+    --transition-speed: 0.3s;
+}
+
+/* Общие стили для всего сайта */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--secondary-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+header h1 {
+    font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+    margin-bottom: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+nav ul li {
+    margin: 0;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: color var(--transition-speed);
+}
+
+nav a:hover {
+    color: #e8f5e9;
+}
+
+/* Основные стили для main */
+main {
+    padding: 20px;
+    flex: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h2 {
+    color: var(--primary-color);
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    margin-bottom: 20px;
+    text-align: center;
+    animation: slideIn 0.5s ease forwards;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Flexbox стили */
+.main-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.main-flex .content {
+    flex: 1;
+    padding-right: 20px;
+}
+
+/* Grid стили */
+.main-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.main-grid .grid-item {
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 4px 8px var(--shadow-color);
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.main-grid .grid-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.main-grid .item4 {
+    grid-column: span 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.shelter-image-grid {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+/* Стили для таблицы */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: white;
+    box-shadow: 0 4px 8px var(--shadow-color);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    text-align: center;
+}
+
+th {
+    background-color: var(--primary-color);
+    color: white;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+}
+
+td {
+    text-align: center;
+    color: var(--text-light-color);
+}
+
+tr:nth-child(even) {
+    background-color: #f3f3f3;
+}
+
+/* Стили для изображений */
+.shelter-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px var(--shadow-color);
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Стили для формы */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 4px 8px var(--shadow-color);
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+label {
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #fff;
+    transition: border-color var(--transition-speed);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+button {
+    padding: 12px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color var(--transition-speed), transform var(--transition-speed);
+}
+
+button:hover {
+    background-color: var(--primary-color-hover);
+    transform: translateY(-2px);
+}
+
+
+footer {
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 15px;
+    font-size: 0.9rem;
+    margin-top: auto;
+    box-shadow: 0 -2px 6px var(--shadow-color);
+}
+
+/* Адаптивные стили */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .main-flex {
+        flex-direction: column;
+    }
+
+    .main-grid .item4 {
+        grid-column: span 1;
+    }
+
+    form {
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    table th, table td {
+        font-size: 0.8rem;
+    }
+
+    button {
+        font-size: 0.9rem;
+        padding: 10px 15px;
+    }
+}
