@@ -40,7 +40,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (isValid) {
                 alert('Форма отправлена!');
-                form.submit();
+              
+                fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form)
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    console.log('Форма успешно отправлена');
+                    form.reset();
+                })
+                //.catch(error => {
+                    //console.error('Ошибка при отправке формы:', error);
+                    //.catch.alert('Произошла ошибка при отправке формы.');
+                //});
             }
         });
     }
