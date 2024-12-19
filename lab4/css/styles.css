@@ -1,14 +1,14 @@
-/* Переменные для цветов и шрифтов */
 :root {
-    --primary-color: #4CAF50;
-    --primary-color-hover: #45a049;
-    --secondary-color: #f9f9f9;
-    --text-color: #333;
-    --text-light-color: #555;
-    --border-color: #ddd;
-    --shadow-color: rgba(0, 0, 0, 0.1);
-    --font-family: 'Arial', sans-serif;
+    --primary-color: #795548; /* Коричневый */
+    --primary-color-hover: #5D4037; /* Более темный коричневый */
+    --secondary-color: #F5EBE0; /* Светло-бежевый фон */
+    --text-color: #3E2723; /* Темно-коричневый текст */
+    --text-light-color: #795548; /* Коричневый текст */
+    --border-color: #D7CCC8; /* Светло-коричневый для границ */
+    --shadow-color: rgba(0, 0, 0, 0.15); /* Тень */
+    --font-family: 'Roboto', sans-serif; 
     --transition-speed: 0.3s;
+    --accent-color: #A1887F; /* Светло-коричневый акцент */
 }
 
 /* Общие стили для всего сайта */
@@ -26,19 +26,43 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    transition: background-color 0.5s ease;
+    background-image: 
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 10px,
+            rgba(161, 136, 127, 0.08) 10px, /* Светло-коричневый с прозрачностью */
+            rgba(161, 136, 127, 0.08) 20px
+        ),
+        repeating-linear-gradient(
+            -45deg,
+            transparent,
+            transparent 10px,
+            rgba(161, 136, 127, 0.08) 10px, /* Светло-коричневый с прозрачностью */
+            rgba(161, 136, 127, 0.08) 20px
+        ),
+        linear-gradient(to bottom, var(--secondary-color), var(--secondary-color)),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Ctext x='15' y='40' font-size='25' fill='rgba(100, 100, 100, 0.1)'%3E🐱%3C/text%3E%3Ctext x='70' y='90' font-size='25' fill='rgba(100, 100, 100, 0.1)'%3E🐶%3C/text%3E%3C/svg%3E");
+    background-repeat: repeat, repeat, no-repeat, repeat;
+    background-size: auto, auto, cover, 120px;
+    background-position: 0 0, 0 0, center, 0 0;
+    background-attachment: fixed;
 }
 
 header {
     background-color: var(--primary-color);
     color: white;
-    padding: 20px;
+    padding: 25px 20px;
     text-align: center;
-    box-shadow: 0 4px 6px var(--shadow-color);
+    box-shadow: 0 4px 10px var(--shadow-color);
+    transition: background-color var(--transition-speed);
 }
 
 header h1 {
-    font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+    font-size: clamp(2rem, 3vw, 3rem);
     margin-bottom: 10px;
+    letter-spacing: 0.05em;
 }
 
 nav ul {
@@ -46,7 +70,7 @@ nav ul {
     padding: 0;
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 30px;
 }
 
 nav ul li {
@@ -56,34 +80,55 @@ nav ul li {
 nav a {
     color: white;
     text-decoration: none;
-    font-weight: bold;
-    font-size: 1rem;
-    transition: color var(--transition-speed);
+    font-weight: 500;
+    font-size: 1.1rem;
+    transition: color var(--transition-speed), transform var(--transition-speed);
+    position: relative;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-color);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition-speed);
 }
 
 nav a:hover {
-    color: #e8f5e9;
+    color: #F0E6EF;
+    transform: translateY(-2px);
+}
+
+nav a:hover::after {
+    transform: scaleX(1);
 }
 
 /* Основные стили для main */
 main {
-    padding: 20px;
+    padding: 30px;
     flex: 1;
     max-width: 1200px;
     margin: 0 auto;
+    transition: padding var(--transition-speed);
 }
 
 h2 {
     color: var(--primary-color);
-    font-size: clamp(1.5rem, 2.5vw, 2rem);
-    margin-bottom: 20px;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    margin-bottom: 30px;
     text-align: center;
-    animation: slideIn 0.5s ease forwards;
+    animation: slideIn 0.7s ease forwards;
+    letter-spacing: 0.05em;
 }
 
 @keyframes slideIn {
     from {
-        transform: translateY(-20px);
+        transform: translateY(-30px);
         opacity: 0;
     }
     to {
@@ -97,7 +142,7 @@ h2 {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 20px;
+    gap: 30px;
     flex-wrap: wrap;
 }
 
@@ -109,22 +154,22 @@ h2 {
 /* Grid стили */
 .main-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
 }
 
 .main-grid .grid-item {
-    padding: 20px;
+    padding: 25px;
     border: 1px solid var(--border-color);
-    border-radius: 10px;
+    border-radius: 12px;
     background-color: white;
-    box-shadow: 0 4px 8px var(--shadow-color);
+    box-shadow: 0 6px 12px var(--shadow-color);
     transition: transform var(--transition-speed), box-shadow var(--transition-speed);
 }
 
 .main-grid .grid-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .main-grid .item4 {
@@ -137,23 +182,28 @@ h2 {
 .shelter-image-grid {
     max-width: 100%;
     height: auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px var(--shadow-color);
+    border-radius: 12px;
+    box-shadow: 0 6px 12px var(--shadow-color);
+    transition: transform var(--transition-speed);
+}
+
+.shelter-image-grid:hover {
+    transform: scale(1.03);
 }
 
 /* Стили для таблицы */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin-top: 30px;
     background-color: white;
-    box-shadow: 0 4px 8px var(--shadow-color);
-    border-radius: 10px;
+    box-shadow: 0 6px 12px var(--shadow-color);
+    border-radius: 12px;
     overflow: hidden;
 }
 
 th, td {
-    padding: 15px;
+    padding: 18px;
     border: 1px solid var(--border-color);
     text-align: center;
 }
@@ -162,8 +212,9 @@ th {
     background-color: var(--primary-color);
     color: white;
     text-transform: uppercase;
-    font-size: 0.9rem;
-    letter-spacing: 0.05em;
+    font-size: 1rem;
+    letter-spacing: 0.07em;
+    font-weight: 500;
 }
 
 td {
@@ -172,23 +223,28 @@ td {
 }
 
 tr:nth-child(even) {
-    background-color: #f3f3f3;
+    background-color: #f0f0f0;
 }
 
 /* Стили для изображений */
 .shelter-image {
     max-width: 100%;
     height: auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px var(--shadow-color);
+    border-radius: 12px;
+    box-shadow: 0 6px 12px var(--shadow-color);
     opacity: 0;
     animation: fadeIn 1s ease-in-out forwards;
+    transition: transform var(--transition-speed);
+}
+
+.shelter-image:hover {
+    transform: scale(1.03);
 }
 
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px);
     }
     to {
         opacity: 1;
@@ -199,29 +255,31 @@ tr:nth-child(even) {
 form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    margin-top: 20px;
-    padding: 20px;
-    border-radius: 10px;
+    gap: 20px;
+    margin-top: 30px;
+    padding: 30px;
+    border-radius: 12px;
     background-color: white;
-    box-shadow: 0 4px 8px var(--shadow-color);
-    max-width: 500px;
+    box-shadow: 0 6px 12px var(--shadow-color);
+    max-width: 600px;
     margin-left: auto;
     margin-right: auto;
 }
 
 label {
-    font-weight: bold;
+    font-weight: 500;
     color: var(--text-color);
+    margin-bottom: 5px;
+    display: block;
 }
 
 input[type="text"],
 input[type="email"],
 textarea {
-    padding: 12px 15px;
+    padding: 15px 20px;
     border: 1px solid var(--border-color);
-    border-radius: 5px;
-    font-size: 1rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
     background-color: #fff;
     transition: border-color var(--transition-speed);
 }
@@ -229,53 +287,325 @@ textarea {
 input[type="text"]:focus,
 input[type="email"]:focus,
 textarea:focus {
-    border-color: var(--primary-color);
+    border-color: var(--accent-color);
     outline: none;
+    box-shadow: 0 0 5px rgba(161, 136, 127, 0.3);
 }
 
 textarea {
     resize: vertical;
-    min-height: 100px;
+    min-height: 120px;
 }
 
 button {
-    padding: 12px 20px;
+    padding: 15px 25px;
     background-color: var(--primary-color);
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 1rem;
-    font-weight: bold;
+    font-size: 1.1rem;
+    font-weight: 500;
     text-transform: uppercase;
-    transition: background-color var(--transition-speed), transform var(--transition-speed);
+    transition: background-color var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed);
+    box-shadow: 0 2px 5px var(--shadow-color);
 }
 
 button:hover {
     background-color: var(--primary-color-hover);
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
 
 footer {
     background-color: var(--primary-color);
     color: white;
     text-align: center;
-    padding: 15px;
-    font-size: 0.9rem;
+    padding: 20px;
+    font-size: 1rem;
     margin-top: auto;
-    box-shadow: 0 -2px 6px var(--shadow-color);
+    box-shadow: 0 -4px 10px var(--shadow-color);
+    transition: background-color var(--transition-speed);
 }
 
 /* Адаптивные стили */
 @media (max-width: 768px) {
     header h1 {
-        font-size: 1.8rem;
+        font-size: 2.2rem;
     }
 
     nav ul {
         flex-direction: column;
-        gap: 10px;
+        gap:color);
+    color: white;
+    text-transform: uppercase;
+    font-size: 1rem;
+    letter-spacing: 0.07em;
+    font-weight: 500;
+}
+
+td {
+    text-align: center;
+    color: var(--text-light-color);
+}
+
+tr:nth-child(even) {
+    background-color: #f0f0f0;
+}
+
+/* Стили для изображений */
+.shelter-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px var(--shadow-color);
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+    transition: transform var(--transition-speed);
+}
+
+.shelter-image:hover {
+    transform: scale(1.03);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Стили для формы */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+    padding: 30px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: 0 6px 12px var(--shadow-color);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+label {
+    font-weight: 500;
+    color: var(--text-color);
+    margin-bottom: 5px;
+    display: block;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    padding: 15px 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1.1rem;
+    background-color: #fff;
+    transition: border-color var(--transition-speed);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+    border-color: var(--accent-color);
+    outline: none;
+    box-shadow: 0 0 5px rgba(161, 136, 127, 0.3);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+button {
+    padding: 15px 25px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: background-color var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed);
+    box-shadow: 0 2px 5px var(--shadow-color);
+}
+
+button:hover {
+    background-color: var(--primary-color-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+footer {
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 1rem;
+    margin-top: auto;
+    box-shadow: 0 -4px 10px var(--shadow-color);
+    transition: background-color var(--transition-speed);
+}
+
+/* Адаптивные стили */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.2rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: color);
+    color: white;
+    text-transform: uppercase;
+    font-size: 1rem;
+    letter-spacing: 0.07em;
+    font-weight: 500;
+}
+
+td {
+    text-align: center;
+    color: var(--text-light-color);
+}
+
+tr:nth-child(even) {
+    background-color: #f0f0f0;
+}
+
+/* Стили для изображений */
+.shelter-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px var(--shadow-color);
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+    transition: transform var(--transition-speed);
+}
+
+.shelter-image:hover {
+    transform: scale(1.03);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Стили для формы */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+    padding: 30px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: 0 6px 12px var(--shadow-color);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+label {
+    font-weight: 500;
+    color: var(--text-color);
+    margin-bottom: 5px;
+    display: block;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    padding: 15px 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1.1rem;
+    background-color: #fff;
+    transition: border-color var(--transition-speed);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+    border-color: var(--accent-color);
+    outline: none;
+    box-shadow: 0 0 5px rgba(161, 136, 127, 0.3);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+button {
+    padding: 15px 25px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: background-color var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed);
+    box-shadow: 0 2px 5px var(--shadow-color);
+}
+
+button:hover {
+    background-color: var(--primary-color-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+footer {
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 1rem;
+    margin-top: auto;
+    box-shadow: 0 -4px 10px var(--shadow-color);
+    transition: background-color var(--transition-speed);
+}
+
+/* Адаптивные стили */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.2rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 15px;
     }
 
     .main-flex {
@@ -289,15 +619,24 @@ footer {
     form {
         width: 90%;
     }
+
+    main {
+        padding: 20px;
+    }
 }
 
 @media (max-width: 480px) {
     table th, table td {
-        font-size: 0.8rem;
+        font-size: 0.9rem;
+        padding: 12px;
     }
 
     button {
-        font-size: 0.9rem;
-        padding: 10px 15px;
+        font-size: 1rem;
+        padding: 12px 20px;
+    }
+
+    header h1 {
+        font-size: 2rem;
     }
 }
